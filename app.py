@@ -1,13 +1,21 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, abort
+from flask import Flask, render_template, request, redirect, url_for, abort, flash
 from flask_sqlalchemy import SQLAlchemy
+import secrets
 
 app = Flask(__name__)
 
-# Use DATABASE_URL if provided (e.g. from Render); otherwise fallback to sqlite
-DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///notes.db')
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+# Production Settings
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', secrets.token_hex(32))
+
+# Database URL handling (Render postgres:// → postgresql://)
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL and DATABASE_URL.startswith('postgres://'):
+    DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL or 'sqlite:///notes.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['DEBUG'] = os.environ.get('FLASK_ENV') == 'development'
 
 db = SQLAlchemy(app)
 
@@ -17,6 +25,8 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
 
     def __repr__(self):
         return f"<Note {self.id} {self.title}>"
@@ -65,8 +75,17 @@ def delete_note(id):
     return redirect(url_for('index'))
 
 
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()  # Roll back db session in case of error
+    return render_template('500.html'), 500
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    # For local development
-    app.run(debug=True, host='0.0.0.0')
+    # Debug only in development
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))

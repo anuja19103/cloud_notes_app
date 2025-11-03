@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Page Not Found - Cloud Notes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">CN</div>
+        <div>
+          <div class="title">Page Not Found</div>
+          <div class="subtitle">The page you're looking for doesn't exist.</div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="{{ url_for('index') }}">Back to Notes</a>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <p>Sorry, we couldn't find what you were looking for. Try going back to the homepage.</p>
+    </div>
+
+    <footer>Cloud Notes — quick and simple</footer>
+  </div>
+</body>
+</html>

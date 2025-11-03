@@ -21,6 +21,14 @@
       </div>
     </div>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     {% if notes %}
       <div class="notes-list">
         {% for note in notes %}
@@ -44,9 +52,7 @@
       </div>
     {% endif %}
 
-    <footer>
-      Built with ❤️ — local demo uses SQLite. Deploy to Render and add a Postgres DB for production.
-    </footer>
+
   </div>
 </body>
 </html>

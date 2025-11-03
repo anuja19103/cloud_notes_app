@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Server Error - Cloud Notes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">CN</div>
+        <div>
+          <div class="title">Server Error</div>
+          <div class="subtitle">Something went wrong on our end.</div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="{{ url_for('index') }}">Back to Notes</a>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <p>We're sorry, but something went wrong. Please try again in a few moments.</p>
+    </div>
+
+    <footer>Cloud Notes — quick and simple</footer>
+  </div>
+</body>
+</html>

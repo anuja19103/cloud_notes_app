@@ -8,6 +8,8 @@
   --radius: 12px;
   --max-width: 900px;
   --glass: rgba(255,255,255,0.6);
+  --success: #4caf50;
+  --error: #f44336;
 }
 
 *{box-sizing:border-box}
@@ -70,6 +72,24 @@ textarea{min-height:140px}
 .muted{color:var(--muted);font-size:13px}
 
 footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+
+.alert {
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--card-shadow);
+}
+
+.alert-success {
+  background: var(--success);
+  color: white;
+}
+
+.alert-error {
+  background: var(--error);
+  color: white;
+}
 
 @media (max-width:560px){
   .container{padding:12px}
