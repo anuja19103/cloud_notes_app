@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cloud Notes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">CN</div>
+        <div>
+          <div class="title">Cloud Notes</div>
+          <div class="subtitle">Simple notes in the cloud — add, edit, delete</div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="{{ url_for('add_note') }}">Add Note</a>
+      </div>
+    </div>
+
+    {% if notes %}
+      <div class="notes-list">
+        {% for note in notes %}
+          <article class="note-card">
+            <div>
+              <h3>{{ note.title }}</h3>
+              <p>{{ note.content }}</p>
+            </div>
+            <div class="note-actions">
+              <a class="btn-ghost" href="{{ url_for('edit_note', id=note.id) }}">Edit</a>
+              <form action="{{ url_for('delete_note', id=note.id) }}" method="post" style="display:inline">
+                <button class="btn-danger" type="submit">Delete</button>
+              </form>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="form-card">
+        <p class="muted">No notes yet. Click <a href="{{ url_for('add_note') }}">Add Note</a> to create one.</p>
+      </div>
+    {% endif %}
+
+    <footer>
+      Built with ❤️ — local demo uses SQLite. Deploy to Render and add a Postgres DB for production.
+    </footer>
+  </div>
+</body>
+</html>

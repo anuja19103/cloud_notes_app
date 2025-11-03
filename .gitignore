@@ -1,0 +1,92 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Flask instance folder
+instance/
+.webassets-cache
+
+# Env vars
+.env
+.env.*
+
+# Database files
+*.db
+*.sqlite3
+
+# PyCharm
+.idea/
+# VSCode
+.vscode/
+# macOS
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Virtual envs
+.env/
+.venv/
+venv/
+ENV/
+env.bak/
+
+# node
+node_modules/
+
+# Keep Procfile and README; don't ignore them
+# Procfile
+
+# Editor temp files
+*~
+*.swp
+
